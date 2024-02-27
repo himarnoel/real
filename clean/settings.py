@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
 from datetime import timedelta
-import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-&$o$ek4+9^l+kndf+ie@r$f6giqalnn21&_iximsuo23%1@-o%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app','localhostle']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -72,25 +72,17 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = "clean.wsgi.application"
-# vercel_app/settings.py
-WSGI_APPLICATION = 'vercel_app.wsgi.app'
+WSGI_APPLICATION = "clean.wsgi.application"
 
-# vercel_app/wsgi.py
-ROOT_URLCONF = 'vercel_app.urls'
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # }
-    # 'default': dj_database_url.config(
-    #     # Replace this value with your local database's connection string.
-    #     default='postgresql://emmanuel:emmanuel@localhost:5432/cleancrafters',
-    #     conn_max_age=600
-    # )
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
 
 
