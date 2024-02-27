@@ -9,5 +9,6 @@
             "src": "/(.*)",
             "dest": "clean/wsgi.py"
         }
-    ]
+    ],
+    "runtime": "python3.9"
 }
