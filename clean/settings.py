@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-&$o$ek4+9^l+kndf+ie@r$f6giqalnn21&_iximsuo23%1@-o%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [    'https://real-vn5y.onrender.com',]
 
 
 # Application definition
@@ -78,7 +78,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "clean.wsgi.application"
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://real-vn5y.onrender.com',
+
     
 ]
 
