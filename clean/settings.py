@@ -78,7 +78,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "clean.wsgi.application"
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'real-vn5y.onrender.com',
+    'https://real-vn5y.onrender.com',
     
 ]
 
