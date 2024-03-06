@@ -8,19 +8,14 @@ from .serializers import UserSerializer,JobSerializer,NewsLetterSubscriberSerial
 from django.contrib.auth import authenticate ,login
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.generics import RetrieveAPIView, ListAPIView,ListCreateAPIView
+from rest_framework.generics import RetrieveAPIView, ListAPIView,ListCreateAPIView,CreateAPIView
+
 #Class based view to register user
-class SignupAPIView(APIView):
- 
+class SignupAPIView(CreateAPIView):
+    serializer_class = UserSerializer
+  
     
-    def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+    
 class LoginView(APIView):
     def post(self, request):
         email = request.data.get('email')
@@ -62,7 +57,7 @@ class JobView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = JobSerializer(data=request.data, context={"request":request})
+        serializer = JobSerializer(data=request.data, context={"userinfo":request.user})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -76,6 +71,9 @@ class CurrentUserView(RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     def get_object(self):
         return self.request.user
+    
+    
+    
     
 class AllUsersView(ListAPIView):
     queryset = User.objects.all()
