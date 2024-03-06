@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager,AbstractBaseUser
 # Create your models here.
+
+
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -24,7 +27,6 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email=email, password=password, **extra_fields)
 
 
-    
 class User(AbstractUser):
     username=None
     email = models.CharField(max_length=80, unique=True)
@@ -32,10 +34,10 @@ class User(AbstractUser):
     last_name=models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20 )
     nin = models.CharField(max_length=20)
+
     objects = CustomUserManager()
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
-
 
 
 class Job(models.Model):
@@ -43,5 +45,18 @@ class Job(models.Model):
     city=models.CharField(max_length=80,)
     street_adddress=models.CharField(max_length=80)
     job_description=models.CharField(max_length=80)
+    user=models.ForeignKey(User,on_delete=models.CASCADE, related_name="job")
     
+
+
+class NewsLetterSubscriberModel(models.Model):
+    email = models.CharField(max_length=80, unique=True)
+    
+    
+
+
+
+
+    # completed=models.BooleanField()
+    # dateTime=models.DateTimeField()
     

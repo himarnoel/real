@@ -1,18 +1,18 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from .models import User,Job,NewsLetterSubscriberModel
 from rest_framework.authentication import TokenAuthentication
-from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer,JobSerializer
+from .serializers import UserSerializer,JobSerializer,NewsLetterSubscriberSerializer
 from django.contrib.auth import authenticate ,login
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Job
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-
+from rest_framework.generics import RetrieveAPIView, ListAPIView,ListCreateAPIView
 #Class based view to register user
 class SignupAPIView(APIView):
+ 
+    
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -62,8 +62,28 @@ class JobView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = JobSerializer(data=request.data)
+        serializer = JobSerializer(data=request.data, context={"request":request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class CurrentUserView(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    def get_object(self):
+        return self.request.user
+    
+class AllUsersView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class NewsLetterSubscriberView(ListCreateAPIView):
+     queryset = NewsLetterSubscriberModel.objects.all()
+     serializer_class = NewsLetterSubscriberSerializer
+    #  permission_classes = [IsAuthenticated]
