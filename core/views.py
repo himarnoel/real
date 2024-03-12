@@ -9,11 +9,12 @@ from django.contrib.auth import authenticate ,login
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.generics import RetrieveAPIView, ListAPIView,ListCreateAPIView,CreateAPIView
+from django.contrib.auth.hashers import make_password
 
 #Class based view to register user
 class SignupAPIView(CreateAPIView):
     serializer_class = UserSerializer
-  
+    
     
     
 class LoginView(APIView):
@@ -24,11 +25,13 @@ class LoginView(APIView):
         if user:
             login(request, user)
             refresh = RefreshToken.for_user(user)
-            return Response({
+            serializer = UserSerializer(user)
+            result={
                 'message': 'Login successful.',
-                'refresh': str(refresh),
                 'access': str(refresh.access_token),
-            })
+                "user":serializer.data
+            }
+            return Response(result)
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -43,7 +46,7 @@ class RefreshTokenView(APIView):
         try:
             token = RefreshToken(refresh_token)
             access_token = str(token.access_token)
-            return Response({'access_token': access_token})
+            return Response({'access_token': access_token},status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         

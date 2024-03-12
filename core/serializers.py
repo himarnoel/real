@@ -5,6 +5,8 @@ from rest_framework import status
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.contrib.auth.hashers import make_password
+
 
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,13 +25,15 @@ class UserSerializer(serializers.ModelSerializer):
     job = JobSerializer(many=True, read_only=True)
     class Meta:
       model = User
-      fields = ["id", "first_name","last_name", "email","phone_number", "nin","password", "job"]
+      fields = ["id", "first_name","last_name", "email","phone_number", "nin","password", "job", "user_type"]
       extra_kwargs = {'password': {'write_only': True}}
       
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+
+      
     
- 
-
-
 
 class NewsLetterSubscriberSerializer(serializers.ModelSerializer):
     class Meta:

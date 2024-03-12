@@ -34,6 +34,7 @@ class User(AbstractUser):
     last_name=models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20 )
     nin = models.CharField(max_length=20)
+    user_type= models.CharField(max_length=20)
     objects = CustomUserManager()
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -44,6 +45,8 @@ class Job(models.Model):
     city=models.CharField(max_length=80,)
     street_adddress=models.CharField(max_length=80)
     job_description=models.CharField(max_length=80)
+    time=models.DateTimeField()
+    completed=models.BooleanField()
     user=models.ForeignKey(User,on_delete=models.CASCADE, related_name="job")
     
 
