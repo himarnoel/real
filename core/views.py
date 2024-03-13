@@ -16,7 +16,7 @@ class SignupAPIView(CreateAPIView):
     serializer_class = UserSerializer
     
     
-    
+       
 class LoginView(APIView):
     def post(self, request):
         email = request.data.get('email')

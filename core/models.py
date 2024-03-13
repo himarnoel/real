@@ -59,6 +59,5 @@ class NewsLetterSubscriberModel(models.Model):
 
 
 
-    # completed=models.BooleanField()
-    # dateTime=models.DateTimeField()
+   
     
