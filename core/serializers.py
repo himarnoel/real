@@ -6,6 +6,7 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
+from payment.serializers import PaymentSerializer
 
 
 class JobSerializer(serializers.ModelSerializer):
@@ -23,9 +24,10 @@ class JobSerializer(serializers.ModelSerializer):
         
 class UserSerializer(serializers.ModelSerializer):
     job = JobSerializer(many=True, read_only=True)
+    payment=PaymentSerializer(many=True, read_only=True)
     class Meta:
       model = User
-      fields = ["id", "first_name","last_name", "email","phone_number", "nin","password", "job", "user_type"]
+      fields = ["id", "first_name","last_name", "email","phone_number", "nin","password", "job", "user_type", "payment"]
       extra_kwargs = {'password': {'write_only': True}}
       
     def create(self, validated_data):

@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-&$o$ek4+9^l+kndf+ie@r$f6giqalnn21&_iximsuo23%1@-o%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['real-vn5y.onrender.com','localhost']
+ALLOWED_HOSTS = ['real-vn5y.onrender.com','localhost','127.0.0.1']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'core',
+    'payment',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
