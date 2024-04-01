@@ -8,7 +8,7 @@ from .serializers import UserSerializer,JobSerializer,NewsLetterSubscriberSerial
 from django.contrib.auth import authenticate ,login
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.generics import RetrieveAPIView, ListAPIView,ListCreateAPIView,CreateAPIView
+from rest_framework.generics import RetrieveAPIView,UpdateAPIView, ListAPIView,ListCreateAPIView,CreateAPIView
 from django.contrib.auth.hashers import make_password
 
 #Class based view to register user
@@ -83,6 +83,16 @@ class AllUsersView(ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
+
+class UserUpdateAPIView(UpdateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return User.objects.filter(pk=self.request.user.pk)
+
+    def perform_update(self, serializer):
+        serializer.save()
 
 class NewsLetterSubscriberView(ListCreateAPIView):
      queryset = NewsLetterSubscriberModel.objects.all()
