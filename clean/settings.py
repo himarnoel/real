@@ -82,7 +82,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "clean.wsgi.application"
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',   
-    'https://haelsoft.vercel.app'
+    'https://haelsoft.vercel.app',
+    'https://cleancrafters.vercel.app'
 ]
 
 
@@ -112,7 +113,7 @@ CORS_ALLOWED_ORIGINS = [
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgres://cleancrafters_user:CTrHaJxueGI4GiWONhPPYIs38WEzlz1w@dpg-cnevlnda73kc73cuvt0g-a.oregon-postgres.render.com/cleancrafters',
+        default=os.environ.get('DatabaseLink'),
         conn_max_age=600
     )
 }
