@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+import dj_database_url
 # from dotenv import load_dotenv
 
 # load_dotenv()
@@ -88,12 +89,12 @@ CORS_ALLOWED_ORIGINS = [
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 # postgres://dbmbxurq:78eM5XZUgL2k356w3NKkrPD1WdfxgbS9@raja.db.elephantsql.com/dbmbxurq 
 # DATABASES = {
@@ -108,10 +109,13 @@ DATABASES = {
 # }
 
 
-# DATABASES = {
-#     'default': dj_database_url.config(default="postgres://cleancrafters_user:CTrHaJxueGI4GiWONhPPYIs38WEzlz1w@dpg-cnevlnda73kc73cuvt0g-a/cleancrafters")
-# }
-
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgres://cleancrafters_user:CTrHaJxueGI4GiWONhPPYIs38WEzlz1w@dpg-cnevlnda73kc73cuvt0g-a.oregon-postgres.render.com/cleancrafters',
+        conn_max_age=600
+    )
+}
 
 
 # Password validation
