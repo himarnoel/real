@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-&$o$ek4+9^l+kndf+ie@r$f6giqalnn21&_iximsuo23%1@-o%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['real-vn5y.onrender.com','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['real-vn5y.onrender.com','localhost','127.0.0.1',"haelclean.vercel.app"]
 
 
 # Application definition
@@ -84,6 +84,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',   
     'https://haelsoft.vercel.app',
     'https://cleancrafters-xi.vercel.app',
+    
     
 ]
 
