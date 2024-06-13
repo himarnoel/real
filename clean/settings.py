@@ -92,12 +92,12 @@ CORS_ALLOWED_ORIGINS = [
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 # postgres://dbmbxurq:78eM5XZUgL2k356w3NKkrPD1WdfxgbS9@raja.db.elephantsql.com/dbmbxurq 
 # DATABASES = {
@@ -112,13 +112,13 @@ CORS_ALLOWED_ORIGINS = [
 # }
 
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default=os.environ.get('DatabaseLink'),
-        conn_max_age=600
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default=os.environ.get('DatabaseLink'),
+#         conn_max_age=600
+#     )
+# }
 
 
 # Password validation
